@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculo da Taxa Basal</title>
+    <style>
+    body {
+background-color: rgb(15, 55, 78);
+font:normal 15pt arial; 
+}
+header {
+    color: white;
+    text-align: center;
+}
+section {
+background-color: white;
+border-radius: 10px;
+padding: 15px;
+width: 500px;
+margin: auto;
+box-shadow: 5px 5px 10px rgb(0, 0, 0);
+
+}
+footer {
+    color: white;
+    text-align: center;
+    font-style: italic;
+}
+
+
+    </style>
+</head>
+<body>
+    <header><h1>Calculadora do gasto calórico</h1></header>
+    <section>
+     <div>Idade: <input type="number" id="idade" name="idade" onfocus="this.value=''"> <font size = "2">anos</font> </div> 
+     <br>Altura: <input type="number" id="altura" name="altura" onfocus="this.value=''"> <font size ="2">em cm </font></br>
+     <br>Peso: <input type="number" id="peso" name="peso" onfocus="this.value=''"> <font size ="2">kg</font></br>   
+    <p></p>
+<input type="radio" name="radsex" id="mas">
+     <label for="mas">Homem</label>
+     <input type="radio" name= "radsex" id="fem">
+     <label for="fem">Mulher</label>
+ <p></p>
+  <input type="button" value="Calcular" style="width:200px; height:30px" onclick="calcular()">  <input type="reset" value="Limpar dados" onclick="Limpar()"  style="height: 30px; width: 100px;"/>
+    <p></p>     
+   <div id="res">Resultado:</div>       
+    <div id= "res2"></div>   
+    </section>
+   
+    <script>
+        function calcular(){
+            let idade = document.getElementById('idade')
+            let altura = document.getElementById('altura')
+            let peso = document.getElementById('peso')
+            let res = document.getElementById('res') 
+            let res2 = document.getElementById('res2')       
+            let idade1 = Number(idade.value)
+            let altura1 = Number(altura.value)
+            let peso1 = Number(peso.value)
+            let sexo = document.getElementsByName('radsex')
+
+
+        if(idade.value.length == 0){
+            window.alert("Favor preencher o espaço vazio")
+        }else if (altura.value.length == 0){
+            window.alert("Favor preencher o espaço vazio")
+        }else if (peso.value.length == 0){
+            window.alert("Favor preencher o espaço vazio")  
+        }
+      if (sexo[0].checked){
+        let mascpeso = peso1 * 13.75 + 66.5
+        let mascaltura = altura1 * 5.0
+        let mascidade = idade1 * 6.8
+        let result = mascpeso + mascaltura - mascidade
+
+        res.innerHTML += `<p> O seu gasto calórico é  <b>${result}</b> </p>` 
+        res2.innerHTML += `Se desejar emagrecer deve ingerir diariamente menos de <b>${result}</b> calorias, ou aumentar o seu gasto energético através da atividade física. Se desejar engordar deve aumentar o consumo calórico.`
+      }else if (sexo[1].checked){
+          let fempeso = peso1 * 9.56 + 665.1
+          let femaltura = altura1 * 1.8
+          let femidade = idade1 * 4.7
+          let result2 = fempeso + femaltura - femidade
+          res.innerHTML += ""
+          res.innerHTML  += `<p> O seu gasto calórico é <b>${result2}</b> </p>`
+          res2.innerHTML += `Se desejar emagrecer deve ingerir diariamente menos de <b>${result2}</b> calorias, ou aumentar o seu gasto energético através da atividade física. Se desejar engordar deve aumentar o consumo calórico.`
+      
+      }
+            
+    }
+    function Limpar()  
+{
+    document.getElementById('idade').value = "";
+    document.getElementById('altura').value = "";
+    document.getElementById('peso').value = "";
+    res2.innerHTML = "";
+    res.innerHTML = ""
+}  
+   
+
+    
+        
+    </script>
+    
+</body>
+</html>
